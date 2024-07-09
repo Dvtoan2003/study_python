@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tìm kiếm sinh viên</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <h1>Tìm kiếm sinh viên</h1>
+    <form action="{% url 'search_student' %}" method="get">
+        <label for="query">Mã sinh viên:</label>
+        <input type="text" name="query" required><br>
+        <input type="submit" value="Tìm kiếm">
+    </form>
+    {% if results %}
+        <h2>Kết quả tìm kiếm:</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Tuổi</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngành học</th>
+                    <th>Năm nhập học</th>
+                    <th>Lớp</th>
+                    <th>GPA</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in results %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.gender }}</td>
+                    <td>{{ student.date_of_birth }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.phone_number }}</td>
+                    <td>{{ student.major }}</td>
+                    <td>{{ student.year_of_enrollment }}</td>
+                    <td>{{ student.class_name }}</td>
+                    <td>{{ student.gpa }}</td>
+                    <td>{{ student.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a href="{% url 'index' %}">Quay lại</a>
+</body>
+</html>

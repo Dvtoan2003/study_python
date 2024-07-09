@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý sinh viên</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <h2>Tìm kiếm sinh viên</h2>
+    <form action="{% url 'search_student' %}" method="get">
+        <input type="text" name="query" placeholder="Nhập mã sinh viên">
+        <input type="submit" value="Tìm kiếm">
+    </form>
+    <h1>Danh sách sinh viên</h1>
+    <a href="{% url 'add_student' %}">Thêm sinh viên</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Tuổi</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Ngành học</th>
+                <th>Năm nhập học</th>
+                <th>Lớp</th>
+                <th>GPA</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.gender }}</td>
+                <td>{{ student.date_of_birth }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.phone_number }}</td>
+                <td>{{ student.major }}</td>
+                <td>{{ student.year_of_enrollment }}</td>
+                <td>{{ student.class_name }}</td>
+                <td>{{ student.gpa }}</td>
+                <td>{{ student.status }}</td>
+                <td>
+                    <a href="{% url 'edit_student' student.id %}">Sửa</a>
+                    <a href="{% url 'delete_student' student.id %}">Xóa</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+    {% if results %}
+        <h3>Kết quả tìm kiếm:</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Tuổi</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngành học</th>
+                    <th>Năm nhập học</th>
+                    <th>Lớp</th>
+                    <th>GPA</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in results %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.gender }}</td>
+                    <td>{{ student.date_of_birth }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.phone_number }}</td>
+                    <td>{{ student.major }}</td>
+                    <td>{{ student.year_of_enrollment }}</td>
+                    <td>{{ student.class_name }}</td>
+                    <td>{{ student.gpa }}</td>
+                    <td>{{ student.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>

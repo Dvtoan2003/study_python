@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sửa sinh viên</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'students/style.css' %}">
+</head>
+<body>
+    <h1>Sửa sinh viên</h1>
+    <form action="{% url 'edit_student' student.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Sửa">
+    </form>
+    <a href="{% url 'index' %}">Quay lại</a>
+</body>
+</html>

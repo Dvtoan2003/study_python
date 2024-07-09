@@ -20,21 +20,19 @@ print(dog2.speak("meo meo"))
 
 # khoi tao class
 class Student:
-    id ==''
-    name == ''
-    # phuong thucs (method)
-    def add(self,id,name):
+    id = ''
+    name = ''
+    # phuong thuc (method)
+    def __init__(self, id, name):
         print('function add student')
-        self.id=id
-        self.name=name
-    def delete(self,id):
-        print('delete student')
-    def edit(self,id):
-        print('edit student')
+        self.id = id
+        self.name = name
+    
     def show(self):
         print(f"ID: {self.id}")
-        print(f"Name:{self.name}")
-# su dung class
-s=Student()
-s.add('001','toan')
+        print(f"Name: {self.name}")
+
+# su dung class (using class)
+s = Student('001', 'toan')
 s.show()
+
